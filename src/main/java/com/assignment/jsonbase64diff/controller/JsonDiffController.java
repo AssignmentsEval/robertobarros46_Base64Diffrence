@@ -43,7 +43,7 @@ public class JsonDiffController {
      */
     @PostMapping("/{id}/left")
     public ResponseEntity<?> addLef(@PathVariable String id, @RequestBody @Validated Base64Input base64Input) {
-        if (base64Input.getValue() == null) {
+        if (base64Input.getValue() == null || base64Input.getValue().isEmpty()) {
             throw new MissingValueException();
         }
         log.info("Request made to left post endpoint with id: {} and value {}", id, base64Input.getValue());
@@ -60,7 +60,7 @@ public class JsonDiffController {
      */
     @PostMapping("/{id}/right")
     public ResponseEntity<?> addRight(@PathVariable String id, @RequestBody @Validated Base64Input base64Input) {
-        if (base64Input.getValue() == null) {
+        if (base64Input.getValue() == null || base64Input.getValue().isEmpty()) {
             throw new MissingValueException();
         }
         jsonBase64Service.saveJsonBase64(base64Input, id, Base64InputType.RIGHT);

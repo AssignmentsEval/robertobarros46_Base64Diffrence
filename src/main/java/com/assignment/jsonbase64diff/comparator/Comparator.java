@@ -38,8 +38,9 @@ public class Comparator {
 
         int length = 0;
         int offset = -1;
-        for (int i = 0; i < leftBase64Input.getValue().length(); i++) {
-            if (leftBase64Input.getValue().charAt(i) != rightBase64Input.getValue().charAt(i)) {
+        for (int i = 0; i <= leftBase64Input.getValue().length(); i++) {
+            if ( i < leftBase64Input.getValue().length()
+                    && leftBase64Input.getValue().charAt(i) != rightBase64Input.getValue().charAt(i)) {
                 length++;
                 if (offset < 0) {
                     offset = i;

@@ -10,4 +10,5 @@ import java.util.Optional;
 @Component
 public interface IJsonBase64Repository extends MongoRepository<Base64Input, String> {
     Optional<List<Base64Input>> findByValueId(String valueId);
+    void deleteByValueId(String valueId);
 }

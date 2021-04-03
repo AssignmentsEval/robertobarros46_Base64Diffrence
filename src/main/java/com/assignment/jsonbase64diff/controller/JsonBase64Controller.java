@@ -17,17 +17,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/v1/diff")
 @Slf4j
-public class JsonDiffController {
+public class JsonBase64Controller {
 
     private final IJsonBase64Service jsonBase64Service;
 
     @Autowired
-    public JsonDiffController(IJsonBase64Service jsonBase64Service) {
+    public JsonBase64Controller(IJsonBase64Service jsonBase64Service) {
         this.jsonBase64Service = jsonBase64Service;
     }
 

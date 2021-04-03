@@ -1,14 +1,14 @@
 package com.assignment.jsonbase64diff.repository;
 
 import com.assignment.jsonbase64diff.model.Base64Input;
+import com.assignment.jsonbase64diff.model.Base64InputType;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Optional;
 
 @Component
 public interface IJsonBase64Repository extends MongoRepository<Base64Input, String> {
-    Optional<List<Base64Input>> findByValueId(String valueId);
+    Optional<Base64Input> findByValueIdAndBase64InputType(String valueId, Base64InputType base64InputType);
     void deleteByValueId(String valueId);
 }

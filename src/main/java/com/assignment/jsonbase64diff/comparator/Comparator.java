@@ -4,21 +4,15 @@ import com.assignment.jsonbase64diff.model.Base64Input;
 import com.assignment.jsonbase64diff.model.Difference;
 import com.assignment.jsonbase64diff.model.Result;
 import com.assignment.jsonbase64diff.model.ResultType;
+import org.springframework.stereotype.Component;
 
 import java.util.LinkedList;
 import java.util.List;
 
+@Component
 public class Comparator {
 
-    private final Base64Input leftBase64Input;
-    private final Base64Input rightBase64Input;
-
-    public Comparator(Base64Input leftBase64Input, Base64Input rightBase64Input) {
-        this.leftBase64Input = leftBase64Input;
-        this.rightBase64Input = rightBase64Input;
-    }
-
-    public Result compare() {
+    public Result compare(Base64Input leftBase64Input, Base64Input rightBase64Input) {
 
         Result.ResultBuilder resultBuilder = Result.builder().id(leftBase64Input.getValueId());
 

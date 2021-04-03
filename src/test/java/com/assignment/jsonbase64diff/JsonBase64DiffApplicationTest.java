@@ -6,22 +6,21 @@ import com.assignment.jsonbase64diff.model.Result;
 import com.assignment.jsonbase64diff.model.ResultType;
 import com.assignment.jsonbase64diff.repository.IJsonBase64Repository;
 import com.assignment.jsonbase64diff.service.IJsonBase64Service;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class JsonBase64DiffApplicationTest {
 
@@ -34,7 +33,7 @@ public class JsonBase64DiffApplicationTest {
     @Autowired
     private IJsonBase64Service jsonBase64Service;
 
-    @Before
+    @BeforeEach
     public void beforeEach() {
         jsonBase64Repository.deleteByValueId("1");
     }

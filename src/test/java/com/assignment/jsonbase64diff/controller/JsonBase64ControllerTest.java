@@ -5,15 +5,13 @@ import com.assignment.jsonbase64diff.model.Result;
 import com.assignment.jsonbase64diff.model.ResultType;
 import com.assignment.jsonbase64diff.repository.IJsonBase64Repository;
 import com.assignment.jsonbase64diff.service.IJsonBase64Service;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.Mockito.when;
@@ -22,7 +20,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
 @WebMvcTest(controllers = JsonBase64Controller.class, excludeAutoConfiguration = EmbeddedMongoAutoConfiguration.class)
 public class JsonBase64ControllerTest {
 

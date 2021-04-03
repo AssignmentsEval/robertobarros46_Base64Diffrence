@@ -7,14 +7,13 @@ import com.assignment.jsonbase64diff.model.Base64InputType;
 import com.assignment.jsonbase64diff.model.Result;
 import com.assignment.jsonbase64diff.model.ResultType;
 import com.assignment.jsonbase64diff.repository.IJsonBase64Repository;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Optional;
 
@@ -26,7 +25,6 @@ import static org.mockito.Mockito.when;
 /**
  * Excludes the embedded mongo configuration to make unit tests instead of integration one
  */
-@RunWith(SpringRunner.class)
 @JsonTest(excludeAutoConfiguration = EmbeddedMongoAutoConfiguration.class)
 public class JsonBase64ServiceImplTest {
 
@@ -86,14 +84,15 @@ public class JsonBase64ServiceImplTest {
         assertEquals(expectedResult, result);
     }
 
-    @Test(expected = Base64InputNotFoundException.class)
+    @Test
     public void getJsonBase64DiffsTestWithException() {
         final String expectedValueId = "1";
         when(jsonBase64Repository.findByValueIdAndBase64InputType(expectedValueId, Base64InputType.LEFT))
                 .thenReturn(Optional.empty());
         when(jsonBase64Repository.findByValueIdAndBase64InputType(expectedValueId, Base64InputType.RIGHT))
                 .thenReturn(Optional.empty());
-
-       jsonBase64Service.getJsonBase64Diffs("1");
+        Assertions.assertThrows(Base64InputNotFoundException.class, () -> {
+            jsonBase64Service.getJsonBase64Diffs("1");
+        });
     }
 }

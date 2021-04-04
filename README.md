@@ -1,0 +1,72 @@
+## JSON Base 64 Comparator API
+### Technologies used
+
+* Java OpenJDK 11
+* Spring
+* Docker and Docker compose
+* Maven
+* Mongo
+
+### Description
+
+This is an API that compares two base64 strings and gets the differences between them, differences in length and offset.
+To get the result it is necessary to send data to the left and the right endpoint with the same valueId (more info about endpoints in [swagger](#How-to-use))
+Then, it will be available in the get endpoint to get the differences between left adn right string within the provided **id**.
+
+### Running
+1. Make sure that you have installed all the necessary tools. 
+   If you are running with docker. If you want to run locally you will need to install openJDK 11 and mongo also
+    * Docker
+    * Docker compose
+    * Maven
+    
+2. Cloning this repo into your local
+
+3. To run the project:
+
+        mvn clean package
+
+4. To run the project without tests:]
+
+        mvn clean package -PskipTests
+
+5. It will clean, compile and generate a jar at target dir. After that just run the docker-compose command:
+
+        docker-compose up
+
+This will bring the whole application up, with mongo as our NoSQL database.
+
+### How to use
+
+To check the endpoints available in this application, you can run it, following the steps above and access: 
+    http://localhost:8080/swagger-ui.html/
+
+This will display a swagger documentation of the available endpoints and their required body and params.
+It is needed to send data to left and right endpoint:
+
+**Left endpoint**
+
+    {
+        "value": "base64string"
+    }
+
+**Right endpoint**
+
+    {
+        "value": "base64string"
+    }
+
+Then get the differences using the get endpoint, providing the **id** that you passed in previous endpoints and you will get a response such as:
+
+    {
+        "id": "string",
+        "result": "EQUAL"
+    }
+
+Remembering the **differences** node will not be there if the strings are equal.
+
+### Test
+
+To run the tests, unit and integration:
+
+    mvn test

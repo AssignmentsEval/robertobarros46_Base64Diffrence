@@ -5,6 +5,8 @@ import com.assignment.jsonbase64diff.model.Base64Input;
 import com.assignment.jsonbase64diff.model.Base64InputType;
 import com.assignment.jsonbase64diff.model.Result;
 import com.assignment.jsonbase64diff.service.IJsonBase64Service;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +19,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
+/**
+ * Controller for all the API endpoints
+ */
 @RestController
+@Api(value = "JsonDifferences")
 @RequestMapping("/v1/diff")
 @Slf4j
 public class JsonBase64Controller {
@@ -39,6 +46,7 @@ public class JsonBase64Controller {
      * @param base64Input JSON-based data input
      * @return HTTP Response: 201 - Created.
      */
+    @ApiOperation(value = "Create a left base64 with a specific id")
     @PostMapping("/{id}/left")
     public ResponseEntity<?> addLef(@PathVariable String id, @RequestBody @Validated Base64Input base64Input) {
         if (base64Input.getValue() == null || base64Input.getValue().isEmpty()) {
@@ -56,6 +64,7 @@ public class JsonBase64Controller {
      * @param base64Input JSON-based data input
      * @return HTTP Response: 201 - Created.
      */
+    @ApiOperation(value = "Create a right base64 with a specific id")
     @PostMapping("/{id}/right")
     public ResponseEntity<?> addRight(@PathVariable String id, @RequestBody @Validated Base64Input base64Input) {
         if (base64Input.getValue() == null || base64Input.getValue().isEmpty()) {
@@ -71,6 +80,7 @@ public class JsonBase64Controller {
      * @param id Operation id.
      * @return HTTP Response: 200 - with the result of comparison.
      */
+    @ApiOperation(value = "Compare both left and right base64 of a respective id")
     @GetMapping("/{id}")
     public ResponseEntity<Result> getDifferences(@PathVariable String id) {
         final Result result = jsonBase64Service.getJsonBase64Diffs(id);

@@ -7,6 +7,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
+
+/**
+ * Object that holds the Result of the comparison between left and right objects.
+ */
 @Document
 @Data
 @Builder

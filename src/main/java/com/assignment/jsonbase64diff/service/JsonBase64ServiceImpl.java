@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+/**
+ * Service Interface implementation responsible to manipulate the data in repository
+ */
 @Service
 public class JsonBase64ServiceImpl implements IJsonBase64Service {
 

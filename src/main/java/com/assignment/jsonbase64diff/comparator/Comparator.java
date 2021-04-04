@@ -12,6 +12,12 @@ import java.util.List;
 @Component
 public class Comparator {
 
+    /**
+     * Compare two Base64 strings and resturns the result.
+     * @param leftBase64Input left input
+     * @param rightBase64Input right input
+     * @return Returns the result of the comparison between both strings
+     */
     public Result compare(Base64Input leftBase64Input, Base64Input rightBase64Input) {
 
         Result.ResultBuilder resultBuilder = Result.builder().id(leftBase64Input.getValueId());
@@ -27,6 +33,13 @@ public class Comparator {
         return resultBuilder.build();
     }
 
+    /**
+     * Processes the differences between two strings of same size, but different in characters,
+     * calculating the offset and length of that difference
+     * @param leftBase64Input left input
+     * @param rightBase64Input right input
+     * @return
+     */
     private List<Difference> processDiff(Base64Input leftBase64Input, Base64Input rightBase64Input) {
         List<Difference> differences = new LinkedList<>();
 
@@ -46,7 +59,6 @@ public class Comparator {
                 offset = -1;
             }
         }
-
         return differences;
     }
     

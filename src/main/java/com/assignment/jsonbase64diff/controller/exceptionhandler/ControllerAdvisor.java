@@ -2,10 +2,8 @@ package com.assignment.jsonbase64diff.controller.exceptionhandler;
 
 import com.assignment.jsonbase64diff.exception.Base64InputNotFoundException;
 import com.assignment.jsonbase64diff.exception.MissingValueException;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
@@ -15,6 +13,9 @@ import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * Advice controller to handle the error in endpoints in a global manner
+ */
 @ControllerAdvice
 public class ControllerAdvisor extends ResponseEntityExceptionHandler {
 

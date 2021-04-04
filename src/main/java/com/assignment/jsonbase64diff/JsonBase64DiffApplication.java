@@ -10,6 +10,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
+/**
+ * Main spring application.
+ */
 @SpringBootApplication
 @ComponentScan
 @EnableMongoRepositories(basePackageClasses = IJsonBase64Repository.class)

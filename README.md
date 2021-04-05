@@ -44,11 +44,15 @@ Then, it will be available in the get endpoint to get the differences between le
         docker-compose up
 
 This will bring the whole application up, with mongo as our NoSQL database.
+To stop the appliaction the only thing that is needed it to run the following command:
+
+      docker-compose down
 
 ### How to use
 
 To check the endpoints available in this application, you can run it, following the steps above and access: 
-    http://localhost:8080/swagger-ui.html/
+    
+      localhost:8080/swagger-ui.html/
 
 This will display a swagger documentation of the available endpoints and their required body and params.
 It is needed to send data to left and right endpoint:

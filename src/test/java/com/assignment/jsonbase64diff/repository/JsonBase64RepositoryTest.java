@@ -27,7 +27,7 @@ public class JsonBase64RepositoryTest {
     @Test
     public void repositorySaveAndFindTest() {
         final String expectedValueId = "1";
-        final String expectedValue = "test";
+        final String expectedValue = "V0FFUwo=";
         final Base64InputType expectedBase64InputType = Base64InputType.LEFT;
         final Base64Input base64Input = Base64Input.builder()
                 .valueId(expectedValueId)
@@ -47,7 +47,7 @@ public class JsonBase64RepositoryTest {
     @Test
     public void testDeleteByValueId() {
         final String expectedValueId = "1";
-        final String expectedValue = "test";
+        final String expectedValue = "V0FFUwo=";
         final Base64InputType expectedBase64InputType = Base64InputType.LEFT;
         final Base64Input base64Input = Base64Input.builder()
                 .valueId(expectedValueId)

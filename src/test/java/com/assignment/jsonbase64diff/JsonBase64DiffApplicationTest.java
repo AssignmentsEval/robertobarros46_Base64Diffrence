@@ -10,9 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -51,7 +49,7 @@ public class JsonBase64DiffApplicationTest {
     @Test
     public void createLeftJson() {
         Base64Input base64Input = Base64Input.builder()
-                .value("test")
+                .value("V0FFUwo=")
                 .build();
 
         final ResponseEntity<?> response = this.restTemplate.postForEntity("/v1/diff/1/left", base64Input, ResponseEntity.class);
@@ -61,7 +59,7 @@ public class JsonBase64DiffApplicationTest {
     @Test
     public void createRightJson() {
         Base64Input base64Input = Base64Input.builder()
-                .value("test")
+                .value("V0FFUwo=")
                 .build();
 
         final ResponseEntity<?> response = this.restTemplate.postForEntity("/v1/diff/1/right", base64Input, ResponseEntity.class);
@@ -71,11 +69,11 @@ public class JsonBase64DiffApplicationTest {
     @Test
     public void createGetDifferencesEqual() {
         Base64Input leftBase64Input = Base64Input.builder()
-                .value("test")
+                .value("V0FFUwo=")
                 .build();
 
         Base64Input rightBase64Input = Base64Input.builder()
-                .value("test")
+                .value("V0FFUwo=")
                 .build();
 
         this.restTemplate.postForEntity("/v1/diff/1/left", leftBase64Input, ResponseEntity.class);
@@ -83,17 +81,17 @@ public class JsonBase64DiffApplicationTest {
         final ResponseEntity<Result> response = this.restTemplate.getForEntity("/v1/diff/1", Result.class);
 
         Result result = response.getBody();
-        assertEquals(result.getResult(), ResultType.EQUAL);
+        assertEquals(result.getResultType(), ResultType.EQUAL);
     }
 
     @Test
     public void createGetDifferenceSize() {
         Base64Input leftBase64Input = Base64Input.builder()
-                .value("testtest")
+                .value("V0FFU19ST0NLUwo=")
                 .build();
 
         Base64Input rightBase64Input = Base64Input.builder()
-                .value("test")
+                .value("V0FFUwo=")
                 .build();
 
         this.restTemplate.postForEntity("/v1/diff/1/left", leftBase64Input, ResponseEntity.class);
@@ -101,17 +99,17 @@ public class JsonBase64DiffApplicationTest {
         final ResponseEntity<Result> response = this.restTemplate.getForEntity("/v1/diff/1", Result.class);
 
         Result result = response.getBody();
-        assertEquals(result.getResult(), ResultType.DIFFERENT_SIZE);
+        assertEquals(result.getResultType(), ResultType.SIZE_MISMATCH);
     }
 
     @Test
     public void createGetDifference() {
         Base64Input leftBase64Input = Base64Input.builder()
-                .value("test1")
+                .value("V0FFUwo=")
                 .build();
 
         Base64Input rightBase64Input = Base64Input.builder()
-                .value("test2")
+                .value("V0FFUww=")
                 .build();
 
         this.restTemplate.postForEntity("/v1/diff/1/left", leftBase64Input, ResponseEntity.class);
@@ -119,9 +117,9 @@ public class JsonBase64DiffApplicationTest {
         final ResponseEntity<Result> response = this.restTemplate.getForEntity("/v1/diff/1", Result.class);
 
         Result result = response.getBody();
-        assertEquals(result.getResult(), ResultType.DIFFERENT);
+        assertEquals(result.getResultType(), ResultType.VALUE_MISMATCH);
         final List<Difference> differences = result.getDifferences();
-        Integer expectedOffset = 4;
+        Integer expectedOffset = 6;
         Integer expectedLength = 1;
         assertEquals(differences.get(0).getOffset(), expectedOffset);
         assertEquals(differences.get(0).getLength(), expectedLength);
@@ -140,7 +138,7 @@ public class JsonBase64DiffApplicationTest {
     @Test
     public void getDifferenceWithNotFoundException() {
         Base64Input leftBase64Input = Base64Input.builder()
-                .value("test")
+                .value("V0FFUwo=")
                 .build();
 
         this.restTemplate.postForEntity("/v1/diff/2/left", leftBase64Input, Object.class);

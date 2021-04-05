@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 
 /**
- * Object that holds the differences if the base64 input are equal in size but has different characters
+ * Object that holds the differences if the base64 input are equal in size but has value mismatch
  */
 @Document
 @Data

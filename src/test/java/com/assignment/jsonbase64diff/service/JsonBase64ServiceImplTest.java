@@ -57,13 +57,13 @@ public class JsonBase64ServiceImplTest {
         final Base64Input leftBase64Input = Base64Input.builder()
                 .id("123456")
                 .valueId("1")
-                .value("test")
+                .value("V0FFUwo=")
                 .base64InputType(Base64InputType.LEFT)
                 .build();
         final Base64Input rightBase64Input = Base64Input.builder()
                 .id("654321")
                 .valueId("1")
-                .value("testtest")
+                .value("V0FFU19ST0NLUwo=")
                 .base64InputType(Base64InputType.LEFT)
                 .build();
         final Optional<Base64Input> leftBase64InputOptional = Optional.ofNullable(leftBase64Input);
@@ -76,7 +76,7 @@ public class JsonBase64ServiceImplTest {
 
         final Result expectedResult = Result.builder()
                 .id("1")
-                .result(ResultType.DIFFERENT_SIZE)
+                .resultType(ResultType.SIZE_MISMATCH)
                 .build();
 
         when(comparator.compare(leftBase64Input, rightBase64Input)).thenReturn(expectedResult);

@@ -6,6 +6,7 @@ import com.assignment.jsonbase64diff.model.Base64Input;
 import com.assignment.jsonbase64diff.model.Base64InputType;
 import com.assignment.jsonbase64diff.model.Result;
 import com.assignment.jsonbase64diff.repository.IJsonBase64Repository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,7 @@ import java.util.Optional;
  * Service Interface implementation responsible to manipulate the data in repository
  */
 @Service
+@Slf4j
 public class JsonBase64ServiceImpl implements IJsonBase64Service {
 
     private final IJsonBase64Repository jsonBase64Repository;
@@ -28,6 +30,7 @@ public class JsonBase64ServiceImpl implements IJsonBase64Service {
 
     @Override
     public void saveJsonBase64(Base64Input base64Input, String id, Base64InputType base64InputType ) {
+        log.info("Saving Base64 string: {} with id: {} and type: {}", base64Input.getValue(), id, base64InputType);
         final Base64Input.Base64InputBuilder inputBuilder = Base64Input.builder();
         final Optional<Base64Input> base64InputOptional =
                 jsonBase64Repository.findByValueIdAndBase64InputType(id, base64InputType);
@@ -38,10 +41,12 @@ public class JsonBase64ServiceImpl implements IJsonBase64Service {
                 .base64InputType(base64InputType)
                 .build();
         jsonBase64Repository.save(input);
+        log.info("Saved Base64 string: {} with id: {} and type: {}", base64Input.getValue(), id, base64InputType);
     }
 
     @Override
     public Result getJsonBase64Diffs(String id) {
+        log.info("Comparing left and right Base64 strings with id: {}", id);
         final Optional<Base64Input> leftBase64InputOptional =
                 jsonBase64Repository.findByValueIdAndBase64InputType(id, Base64InputType.LEFT);
         final Optional<Base64Input> rightBase64InputOptional =

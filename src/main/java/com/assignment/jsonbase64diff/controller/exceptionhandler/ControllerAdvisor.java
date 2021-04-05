@@ -25,7 +25,8 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
 
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
-        body.put("message", "Input nof found, please provide a valid id");
+        body.put("message",
+                "Input nof found, please provide a valid id, maybe you forgot to set the left and right values");
 
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }

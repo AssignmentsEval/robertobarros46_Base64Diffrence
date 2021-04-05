@@ -50,6 +50,7 @@ public class JsonBase64Controller {
     @PostMapping("/{id}/left")
     public ResponseEntity<?> addLef(@PathVariable String id, @RequestBody @Validated Base64Input base64Input) {
         if (base64Input.getValue() == null || base64Input.getValue().isEmpty()) {
+            log.error("Missing value in request");
             throw new MissingValueException();
         }
         log.info("Request made to left post endpoint with id: {} and value {}", id, base64Input.getValue());
@@ -68,8 +69,10 @@ public class JsonBase64Controller {
     @PostMapping("/{id}/right")
     public ResponseEntity<?> addRight(@PathVariable String id, @RequestBody @Validated Base64Input base64Input) {
         if (base64Input.getValue() == null || base64Input.getValue().isEmpty()) {
+            log.error("Missing value in request");
             throw new MissingValueException();
         }
+        log.info("Request made to right post endpoint with id: {} and value {}", id, base64Input.getValue());
         jsonBase64Service.saveJsonBase64(base64Input, id, Base64InputType.RIGHT);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -83,6 +86,7 @@ public class JsonBase64Controller {
     @ApiOperation(value = "Compare both left and right base64 of a respective id")
     @GetMapping("/{id}")
     public ResponseEntity<Result> getDifferences(@PathVariable String id) {
+        log.info("Request made to get endpoint with id: {}", id);
         final Result result = jsonBase64Service.getJsonBase64Diffs(id);
         return ResponseEntity.ok().body(result);
     }

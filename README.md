@@ -7,6 +7,7 @@
 * Maven
 * Mongo
 * Swagger
+* Loombok
 
 ### Description
 
@@ -72,7 +73,7 @@ It is needed to send data to left and right endpoint:
 Then get the differences using the get endpoint, providing the **id** that you passed in previous endpoints and you will get a response such as:
 
     {
-        "id": "string",
+        "id": "123456",
         "result": "EQUAL"
     }
 

@@ -17,7 +17,7 @@ import java.util.List;
 public class Result {
 
     private String id;
-    private ResultType result;
+    private ResultType resultType;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<Difference> differences;

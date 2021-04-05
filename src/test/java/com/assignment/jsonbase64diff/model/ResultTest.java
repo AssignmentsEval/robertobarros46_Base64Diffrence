@@ -24,12 +24,12 @@ class ResultTest {
         expectedDifferences.add(difference);
         final Result result = Result.builder()
                 .id(expectedId)
-                .result(expectedResultType)
+                .resultType(expectedResultType)
                 .differences(expectedDifferences)
                 .build();
 
         assertEquals(expectedId, result.getId());
-        assertEquals(expectedResultType, result.getResult());
+        assertEquals(expectedResultType, result.getResultType());
         assertEquals(expectedDifferences, result.getDifferences());
     }
 

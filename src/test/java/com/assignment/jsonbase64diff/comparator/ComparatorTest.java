@@ -21,15 +21,15 @@ class ComparatorTest {
     private Comparator comparator;
 
     @Test
-    void compareTestDifferentSize() {
+    void compareTestSizeMismatch() {
         final String expectedLeftId = "123456";
         final String expectedLeftValueId = "1";
-        final String expectedLeftValue = "test";
+        final String expectedLeftValue = "V0FFUwo=";
         final Base64InputType expectedLeftBaseInputType = Base64InputType.LEFT;
 
         final String expectedRightId = "654321";
         final String expectedRightValueId = "1";
-        final String expectedRightValue = "testest";
+        final String expectedRightValue = "V0FFU19ST0NLUwo=";
         final Base64InputType expectedRightBaseInputType = Base64InputType.RIGHT;
 
         final Base64Input leftBase64Input = Base64Input.builder()
@@ -46,7 +46,7 @@ class ComparatorTest {
                 .build();
         final Result result = comparator.compare(leftBase64Input, rightBase64Input);
         assertEquals(expectedLeftValueId, result.getId());
-        assertEquals(ResultType.DIFFERENT_SIZE, result.getResult());
+        assertEquals(ResultType.SIZE_MISMATCH, result.getResultType());
         assertNull(result.getDifferences());
     }
 
@@ -54,12 +54,12 @@ class ComparatorTest {
     void compareTestEqual() {
         final String expectedLeftId = "123456";
         final String expectedLeftValueId = "1";
-        final String expectedLeftValue = "test";
+        final String expectedLeftValue = "V0FFUwo=";
         final Base64InputType expectedLeftBaseInputType = Base64InputType.LEFT;
 
         final String expectedRightId = "654321";
         final String expectedRightValueId = "1";
-        final String expectedRightValue = "test";
+        final String expectedRightValue = "V0FFUwo=";
         final Base64InputType expectedRightBaseInputType = Base64InputType.RIGHT;
 
         final Base64Input leftBase64Input = Base64Input.builder()
@@ -76,20 +76,20 @@ class ComparatorTest {
                 .build();
         final Result result = comparator.compare(leftBase64Input, rightBase64Input);
         assertEquals(expectedLeftValueId, result.getId());
-        assertEquals(ResultType.EQUAL, result.getResult());
+        assertEquals(ResultType.EQUAL, result.getResultType());
         assertNull(result.getDifferences());
     }
 
     @Test
-    void compareTestDifferent() {
+    void compareTestValueMismatch() {
         final String expectedLeftId = "123456";
         final String expectedLeftValueId = "1";
-        final String expectedLeftValue = "test11";
+        final String expectedLeftValue = "V0FFUwo=";
         final Base64InputType expectedLeftBaseInputType = Base64InputType.LEFT;
 
         final String expectedRightId = "654321";
         final String expectedRightValueId = "1";
-        final String expectedRightValue = "test12";
+        final String expectedRightValue = "V0FFUww=";
         final Base64InputType expectedRightBaseInputType = Base64InputType.RIGHT;
 
         final Base64Input leftBase64Input = Base64Input.builder()
@@ -106,10 +106,10 @@ class ComparatorTest {
                 .build();
         final Result result = comparator.compare(leftBase64Input, rightBase64Input);
         assertEquals(expectedLeftValueId, result.getId());
-        assertEquals(ResultType.DIFFERENT, result.getResult());
+        assertEquals(ResultType.VALUE_MISMATCH, result.getResultType());
         final List<Difference> differences = result.getDifferences();
 
-        assertEquals(differences.get(0).getOffset(), 5);
+        assertEquals(differences.get(0).getOffset(), 6);
         assertEquals(differences.get(0).getLength(), 1);
     }
 }

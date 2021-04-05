@@ -10,7 +10,7 @@ class Base64InputTest {
     public void builderTest() {
         final String expectedId = "123456";
         final String expectedValueId = "1";
-        final String expectedValue = "test";
+        final String expectedValue = "V0FFUwo=";
         final Base64InputType expectedBase64InputType = Base64InputType.LEFT;
         Base64Input base64Input = Base64Input.builder()
                 .id(expectedId)

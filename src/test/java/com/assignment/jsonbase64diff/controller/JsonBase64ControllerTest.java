@@ -39,40 +39,40 @@ public class JsonBase64ControllerTest {
     public void testGetDifferences() throws Exception {
         final Result expectedResult = Result.builder()
                 .id("1")
-                .result(ResultType.EQUAL)
+                .resultType(ResultType.EQUAL)
                 .build();
         when(jsonBase64Service.getJsonBase64Diffs("1")).thenReturn(expectedResult);
 
         this.mvc.perform(get("/v1/diff/1"))
                 .andExpect(status().isOk())
-                .andExpect(content().string("{\"id\":\"1\",\"result\":\"EQUAL\"}"));
+                .andExpect(content().string("{\"id\":\"1\",\"resultType\":\"EQUAL\"}"));
     }
 
     @Test
     public void testCreateLeft() throws Exception {
         this.mvc.perform(post("/v1/diff/1/left").contentType(MediaType.APPLICATION_JSON)
-                .content("{\"value\": \"test\"}"))
+                .content("{\"value\": \"V0FFUwo=\"}"))
                 .andExpect(status().isCreated());
     }
 
     @Test
     public void testCreateRight() throws Exception {
         this.mvc.perform(post("/v1/diff/1/right").contentType(MediaType.APPLICATION_JSON)
-                .content("{\"value\": \"test\"}"))
+                .content("{\"value\": \"V0FFUwo=\"}"))
                 .andExpect(status().isCreated());
     }
 
     @Test
     public void testCreateLeftBadRequest() throws Exception {
         this.mvc.perform(post("/v1/diff/1/left").contentType(MediaType.APPLICATION_JSON)
-                .content("{\"wrongValue\": \"test\"}"))
+                .content("{\"wrongValue\": \"V0FFUwo=\"}"))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
     public void testCreateRightBadRequest() throws Exception {
         this.mvc.perform(post("/v1/diff/1/right").contentType(MediaType.APPLICATION_JSON)
-                .content("{\"wrongValue\": \"test\"}"))
+                .content("{\"wrongValue\": \"V0FFUwo=\"}"))
                 .andExpect(status().isBadRequest());
     }
 

@@ -6,6 +6,7 @@
 * Docker and Docker compose
 * Maven
 * Mongo
+* Swagger
 
 ### Description
 
@@ -15,12 +16,20 @@ Then, it will be available in the get endpoint to get the differences between le
 
 ### Running
 1. Make sure that you have installed all the necessary tools. 
-   If you are running with docker. If you want to run locally you will need to install openJDK 11 and mongo also
+   If you are running with docker.
     * Docker
     * Docker compose
     * Maven
-    
+   
+   To run locally without docker you will need to install openJDK 11
+      
+         openjdk version "11.0.2" 2019-01-15
+
+   together with mongo. [How to install mongo](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/)
+
+
 2. Cloning this repo into your local
+
 
 3. To run the project:
 
